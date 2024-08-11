@@ -29,9 +29,22 @@
       theme = "agnoster";
     };
     initExtra = ''
-      export PATH=~/.cargo/bin:~/.bun/bin:~/qrt/qrt_std/bin:$PATH && maxfetch
+      export PATH=~/.cargo/bin:~/.bun/bin:$PATH && maxfetch
     '';
   };
+
+  programs.kitty =
+    {
+      enable = true;
+      theme = "Catppuccin-Mocha";
+      extraConfig = ''
+        font_family      0xProto Nerd Font
+        bold_font        auto
+        italic_font      auto
+        bold_italic_font auto
+        background_opacity 0.8
+      '';
+    };
 
 
   # This value determines the Home Manager release that your configuration is
