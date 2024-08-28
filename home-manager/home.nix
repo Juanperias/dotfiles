@@ -6,32 +6,58 @@
   home.username = "juan";
   home.homeDirectory = "/home/juan";
 
-
-
-  programs.zsh = {
-    enable = true;
-    enableCompletion = true;
-    autosuggestion.enable = true;
-    syntaxHighlighting.enable = true;
-    shellAliases = {
-      update-home = "home-manager switch";
-      n = "nvim .";
-      nn = "nvim ~/.config/nvim";
-      update-nix = "sudo nixos-rebuild switch";
-    };
-    history = {
-      size = 10000;
-      path = "${config.xdg.dataHome}/zsh/history";
-    };
-    oh-my-zsh = {
+  programs = {
+    nushell = {
       enable = true;
-      plugins = [ "git" ];
-      theme = "agnoster";
+      extraConfig = ''
+        let carapace_completer = {|spans|
+        carapace $spans.0 nushell $spans | from json
+        }
+        $env.config = {
+         show_banner: false,
+         completions: {
+         case_sensitive: false # case-sensitive completions
+         quick: true    # set to false to prevent auto-selecting completions
+         partial: true    # set to false to prevent partial filling of the prompt
+         algorithm: "fuzzy"    # prefix or fuzzy
+         external: {
+         # set to false to prevent nushell looking into $env.PATH to find more suggestions
+             enable: true 
+         # set to lower can improve completion performance at the cost of omitting some options
+             max_results: 100 
+             completer: $carapace_completer # check 'carapace_completer' 
+           }
+         }
+        } 
+        $env.PATH = ($env.PATH | 
+        split row (char esep) |
+        prepend /home/myuser/.apps |
+        append /usr/bin/env
+        )
+      '';
     };
-    initExtra = ''
-      export PATH=~/.cargo/bin:~/.bun/bin:$PATH && maxfetch
-    '';
+    carapace = {
+      enable = true;
+      enableNushellIntegration = true;
+    };
+    starship = {
+      enable = true;
+      settings = {
+        add_newline = true;
+        username = {
+          style_user = "bright-white bold";
+          style_root = "bright-red bold";
+        };
+        character = {
+          success_symbol = "[➜](bold green)";
+          error_symbol = "[➜](bold red)";
+        };
+      };
+    };
+
   };
+
+
 
   programs.kitty =
     {

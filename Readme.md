@@ -2,8 +2,8 @@
 
 These are my dotfiles from hyprland and nixos, in most applications it uses the catppuccin theme as in the terminal, in the notification daemon among others.
 
-Windows manager: HyrLand 🔥 <br>
-Shell: Zsh & Oh my zsh 💻 <br>
+Windows manager: Hyprland 🔥 <br>
+Shell: Nushell and starship 💻 <br>
 Menu: Rofi with arthur theme 🌶️ <br>
 Editor: neovim with lazyvim 📝 <br>
 Notify daemon: dunst 👿 <br>
