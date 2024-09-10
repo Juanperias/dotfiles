@@ -1,51 +1,68 @@
 {
-	"layer": "top",
-	// Using margin-bottom with a negative value in order to reduce the space between Hyprland window and waybar
-	"margin-bottom": -10,
-	"margin-top": 10,
-	"modules-left": ["custom/launcher", "memory", "network"],
-	"modules-right": ["pulseaudio", "battery", "custom/power"],
-	"pulseaudio": {
-		"tooltip": false,
-		"scroll-step": 5,
-		"format": "   {volume}%",
-		"format-muted": "   {volume}%",
-		"on-click":"pavucontrol",
-    "on-click-right": "python ~/.config/scripts/mute.py",
-	},
-	"network": {
-		// "interface": "wlp2*", // (Optional) To force the use of this interface
-		"format-wifi": "",
-		"format-ethernet": "",
-		"tooltip-format": "{essid} ({signalStrength}%)",
-		"format-linked": "{ifname} (No IP) ",
-		"format-disconnected": "⚠",
-		"format-alt": "{ifname}: {ipaddr}/{cidr}"
-		},
+    "layer": "top", // Waybar at top layer
+    "position": "top", // Waybar position (top|bottom|left|right)
+    // "width": 1280, // Waybar width
+    // Choose the order of the modules
+    "modules-left": ["wlr/workspaces"],
+    "modules-center": ["custom/music"],
+    "modules-right": ["pulseaudio", "backlight", "battery", "clock", "tray", "custom/lock"],
+    "wlr/workspaces": {
+    "disable-scroll": true,
+    "sort-by-name": true,
+    "all-outputs": true,  // Asegúrate de que los workspaces se muestran en todas las pantallas
+    "format": "{name}",  // Muestra el nombre del workspace
+    "format-focused": " {name}",  // Mostrar un ícono cuando el workspace está enfocado
+    "format-unfocused": " {name}",  // Mostrar otro ícono cuando no está enfocado
+    "on-click": "hyprctl dispatch workspace {name}"  // Permite cambiar de workspace al hacer clic
+    },
+
+    "tray": {
+        "icon-size": 21,
+        "spacing": 10
+    },
+    "custom/music": {
+        "format": "  {}",
+        "escape": true,
+        "interval": 5,
+        "tooltip": false,
+        "exec": "playerctl metadata --format='{{ title }}'",
+        "on-click": "playerctl play-pause",
+        "max-length": 50
+    },
+    "clock": {
+        "timezone": "America/Caracas",
+        "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
+        "format-alt": " {:%d/%m/%Y}",
+        "format": " {:%H:%M}"
+    },
+    "backlight": {
+        "device": "intel_backlight",
+        "format": "{icon}",
+        "format-icons": ["", "", "", "", "", "", "", "", ""]
+    },
     "battery": {
         "states": {
-            "good": 95,
             "warning": 30,
-            "critical": 20
+            "critical": 15
         },
-        "format": "{icon}  {capacity}%",
-        "format-charging": " {capacity}%",
-        "format-plugged": " {capacity}%",
-        "format-alt": "{time} {icon}",
-        "format-icons": ["", "", "", "", ""]
+        "format": "{icon}",
+        "format-charging": "󰂄",
+        "format-plugged": "󰂄",
+        "format-alt": "{icon}",
+        "format-icons": ["", "",  "", "", "", "", "", "", "", "", "", ""]
     },
-	"tray":{
-		"icon-size":18,
-		"spacing": 10
-	},
-    "memory": {
-        "interval": 30,
-        "format": "   {}%",
-        "max-length": 10
+    "pulseaudio": {
+        // "scroll-step": 1, // %, can be a float
+        "format": "{icon} {volume}%",
+        "format-muted": "",
+        "format-icons": {
+            "default": ["", "", " "]
+        },
+        "on-click": "pavucontrol"
     },
-    "custom/launcher":{
-        "format": "\udb84\udd05 ",
-        "on-click": "rofi -show drun",
-        "on-click-right": "killall rofi"
+    "custom/lock": {
+        "tooltip": false,
+        "on-click": "sh -c '(sleep 0.5s; hyprlock)' & disown",
+        "format": "",
     },
 }

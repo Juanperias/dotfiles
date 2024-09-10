@@ -34,9 +34,18 @@
         prepend /home/myuser/.apps |
         append /usr/bin/env
         )
+        pokemon-colorscripts -r
       '';
+      shellAliases = {
+        update-nix = "sudo nixos-rebuild switch --flake /etc/nixos#my-system";
+        ls = "eza -TL 1 --icons";
+      };
     };
     carapace = {
+      enable = true;
+      enableNushellIntegration = true;
+    };
+    zoxide = {
       enable = true;
       enableNushellIntegration = true;
     };
