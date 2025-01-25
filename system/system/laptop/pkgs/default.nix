@@ -1,20 +1,13 @@
 {pkgs, ...}: {
-  imports = [./browser.nix ./shell.nix];
+   imports = [./browser.nix ./shell.nix];
+   programs.niri.enable = true;
 
-  services.flatpak.enable = true;
-  programs.niri.enable = true;
-
-environment.systemPackages = with pkgs; [
+   environment.systemPackages = with pkgs; [
     neovim
-    kitty
-    gnome-software
-    github-desktop 
+    kitty 
     git 
     obsidian
-    alacritty
     freshfetch
-	    zapzap
-
     spotify
     wget
     eza
@@ -23,7 +16,6 @@ environment.systemPackages = with pkgs; [
     emacs
     gh
     swww
-    hyprshot
     foot
     dunst
     libnotify
