@@ -17,6 +17,7 @@ environment.systemPackages = with pkgs; [
 
     spotify
     wget
+    eza
     osu-lazer
     xdotool
     emacs
