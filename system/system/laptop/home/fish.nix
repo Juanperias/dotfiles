@@ -3,8 +3,7 @@
 	enable = true;
 	interactiveShellInit = ''
 	 zoxide init fish | source
-    	 freshfetch
-    	 alias emacs="emacs -nw"
+    	 freshfetch 
 	'';
    	shellAliases = {
 	   emacs = "emacs -nw";

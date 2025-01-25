@@ -31,6 +31,7 @@
     blueman
     waybar
     bun
+    zellij
     xwayland-satellite
     (wrapOBS {
         plugins = with obs-studio-plugins; [
