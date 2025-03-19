@@ -1,22 +1,20 @@
 { pkgs }:
 pkgs.writeShellScriptBin "commit" ''
-  if [ -z "$1" ]; then
-    echo "You should pass a commit name 😠"
+if [ -z "$1" ]; then
+    echo "You should pass a commit name 😡"
     exit 1
-  else
+else
     name=$1
-  fi
+fi
 
-  if [ -z "$2" ]; then
-    echo "You should pass a branch 😠"
-    exit 1
-  else
+if [ -z "$2" ]; then
+   branch="main" 
+else
     branch=$2
-  fi
+fi
 
-
-  git add .
-  git commit -m "$name"
-  git push origin "$branch"
+git add .
+git commit -m "$name"
+git push origin "$branch"
 ''
 

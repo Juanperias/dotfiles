@@ -1,4 +1,4 @@
-{pkgs, ...}: {  
+{pkgs, config, ...}: {  
   home.packages = with pkgs; [
     gnomeExtensions.paperwm
     gnomeExtensions.open-bar

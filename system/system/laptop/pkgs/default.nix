@@ -1,21 +1,20 @@
 {pkgs, ...}: {
-   imports = [./browser.nix ./shell.nix];
-   programs.niri.enable = true;
+  imports = [./browser.nix ./shell.nix];
 
-   environment.systemPackages = with pkgs; [
+  services.flatpak.enable = true;
+  programs.niri.enable = true;
+
+environment.systemPackages = with pkgs; [
     neovim
-    kitty 
     git 
-    obsidian
+    obsidian 
     freshfetch
+    zapzap
     spotify
     wget
-    eza
-    osu-lazer
-    xdotool
     emacs
     gh
-    swww
+    swww 
     foot
     dunst
     libnotify
@@ -26,18 +25,12 @@
     ulauncher
     ripgrep
     fd
-    clang # only for neovim
-    swaybg
     blueman
     waybar
-    bun
-    zellij
-    xwayland-satellite
     (wrapOBS {
         plugins = with obs-studio-plugins; [
           droidcam-obs
         ];
       })
-   kdePackages.kdenlive
 ];
 }

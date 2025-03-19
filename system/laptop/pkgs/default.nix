@@ -1,36 +1,54 @@
-{pkgs, ...}: {
-  imports = [./browser.nix ./shell.nix];
+{pkgs, ...}:
+{
+   imports = [./browser.nix ./shell.nix];
+   programs.niri.enable = true;
+   services.flatpak.enable = true;
+   services.blueman.enable = true;
 
-  services.flatpak.enable = true;
-  programs.niri.enable = true;
-
-environment.systemPackages = with pkgs; [
+   environment.systemPackages = with pkgs; [
     neovim
+    kitty 
     git 
-    obsidian 
+    obsidian
+    gnome-software
     freshfetch
-    zapzap
     spotify
     wget
+    eza
+    osu-lazer
+    xdotool
+    gnupg
+    gzdoom
     emacs
     gh
-    swww 
+    github-desktop
+    swww
     foot
+    logisim-evolution
     dunst
     libnotify
+    hplip
     nixd
     vesktop
     wl-clipboard
     rust-analyzer
     ulauncher
     ripgrep
+    libreoffice-qt6
     fd
-    blueman
+    zls
+    clang # only for neovim
+    swaybg
     waybar
+    bun
+    rustfmt
+    zellij
+    xwayland-satellite
     (wrapOBS {
         plugins = with obs-studio-plugins; [
           droidcam-obs
         ];
       })
+   kdePackages.kdenlive
 ];
 }

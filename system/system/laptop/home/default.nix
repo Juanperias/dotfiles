@@ -1,9 +1,9 @@
 
-{user,  ...}: {
+{pkgs, config, user,  ...}: {
   home.username = user;
   home.homeDirectory = "/home/${user}";
-  home.packages = [];
-  imports = [./gnome.nix ./zoxide.nix ./fish.nix ./zellij.nix];
+  home.packages = with pkgs; [];
+  imports = [./gnome.nix ./zoxide.nix];
 
 
   home.stateVersion = "23.11";
