@@ -1,4 +1,4 @@
-{ pkgs }:
+{pkgs}:
 pkgs.writeShellScriptBin "commit" ''
   if [ -z "$1" ]; then
     echo "You should pass a commit name 😠"
@@ -19,4 +19,3 @@ pkgs.writeShellScriptBin "commit" ''
   git commit -m "$name"
   git push origin "$branch"
 ''
-

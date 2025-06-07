@@ -1,12 +1,10 @@
-
-{user,  ...}: {
+{user, ...}: {
   home.username = user;
   home.homeDirectory = "/home/${user}";
   home.packages = [];
-  imports = [./gnome.nix ./zoxide.nix ./fish.nix ./zellij.nix];
-  
+  imports = [./gnome.nix ./zoxide.nix ./fish.nix ./zellij.nix ./hyprwm.nix ./hypridle.nix];
 
   home.stateVersion = "23.11";
-  
+
   programs.home-manager.enable = true;
 }

@@ -1,18 +1,33 @@
-{pkgs, ...}:
-{
-   imports = [./browser.nix ./shell.nix];
-   programs.niri.enable = true;
-   services.flatpak.enable = true;
-   services.blueman.enable = true;
 
-   environment.systemPackages = with pkgs; [
+{pkgs, ...}: 
+let
+  
+  nodeDeps = pkgs.node2nix.override {
+    nodejs = pkgs.nodejs;
+  };
+in
+{
+  imports = [./browser.nix ./shell.nix];
+
+  services.flatpak.enable = true;
+  services.blueman.enable = true;
+
+  environment.systemPackages = with pkgs; [
     neovim
-    kitty 
-    git 
+    grimblast
+     python312Packages.python-lsp-server
+    kitty
+    irssi
+    git
     obsidian
     gnome-software
     freshfetch
+    clang-tools
+    ghidra
+    kdePackages.dolphin
     spotify
+    chromium
+    ghex
     wget
     eza
     osu-lazer
@@ -20,8 +35,12 @@
     gnupg
     gzdoom
     emacs
+    blender
     gh
+    manim
+    python39
     github-desktop
+    docker-compose
     swww
     foot
     logisim-evolution
@@ -29,6 +48,7 @@
     libnotify
     hplip
     nixd
+    vtsls
     vesktop
     wl-clipboard
     rust-analyzer
@@ -36,8 +56,10 @@
     ripgrep
     libreoffice-qt6
     fd
-    zls
-    clang # only for neovim
+            llvmPackages_latest.lldb
+        llvmPackages_latest.libllvm
+        llvmPackages_latest.libcxx
+        llvmPackages_latest.clang
     swaybg
     waybar
     bun
@@ -45,10 +67,11 @@
     zellij
     xwayland-satellite
     (wrapOBS {
-        plugins = with obs-studio-plugins; [
-          droidcam-obs
-        ];
-      })
+      plugins = with obs-studio-plugins; [
+        droidcam-obs
+      ];
+    })
+
    kdePackages.kdenlive
-];
+  ];
 }

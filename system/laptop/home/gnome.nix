@@ -1,14 +1,12 @@
-{pkgs, ...}: {  
+{pkgs, ...}: {
   home.packages = with pkgs; [
     gnomeExtensions.paperwm
     gnomeExtensions.open-bar
   ];
 
-  
-
   gtk = {
     enable = true;
-     iconTheme = {
+    iconTheme = {
       name = "Papirus-Dark";
       package = pkgs.papirus-icon-theme;
     };
@@ -29,9 +27,8 @@
       disable-user-extensions = false;
 
       enabled-extensions = [
-         "paperwm@paperwm.github.com"
-         "openbar@neuromorph"
-
+        "paperwm@paperwm.github.com"
+        "openbar@neuromorph"
       ];
     };
   };
