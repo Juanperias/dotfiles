@@ -1,4 +1,4 @@
-vim.cmd "colorscheme monochrome"
+vim.cmd "colorscheme vague"
 vim.opt.clipboard = "unnamedplus"
 vim.opt.termguicolors = true
-vim.notify = require("notify")
+vim.opt.number = true

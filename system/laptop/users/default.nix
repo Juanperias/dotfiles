@@ -1,13 +1,9 @@
-{
-  user,
-  pkgs,
-  ...
-}: {
+{user, pkgs, ...}: { 
   users.users.${user} = {
     isNormalUser = true;
-    shell = pkgs.fish;
     description = user;
-    extraGroups = ["networkmanager" "wheel"];
-    packages = [];
+    shell = pkgs.zsh;
+    extraGroups = [ "networkmanager" "wheel" ];
+    packages = with pkgs; [];
   };
 }

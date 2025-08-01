@@ -7,19 +7,18 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    zen-browser.url = "github:MarceColl/zen-browser-flake";
-  };
+    neovim-nightly-overlay.url = "github:nix-community/neovim-nightly-overlay";
+  }; 
 
   outputs = {
     nixpkgs,
-    home-manager,
-    zen-browser,
+    home-manager, 
     ...
   } @ inputs: let
     system = "x86_64-linux";
     user = "juan"; # this user will be used also in home-manager
   in {
-    formatter.${system} = nixpkgs.legacyPackages.${system}.alejandra;
+    formatter.${system} = nixpkgs.legacyPackages.${system}.nixfmt-tree;
     nixosConfigurations.laptop = nixpkgs.lib.nixosSystem {
       inherit system;
       specialArgs = {
@@ -28,12 +27,14 @@
 
       modules = [
         ./laptop
+
         {
           environment.systemPackages = [
-            inputs.zen-browser.packages."${system}".default
+	    inputs.neovim-nightly-overlay.packages.${system}.default
           ];
         }
 
+	
         home-manager.nixosModules.home-manager
         {
           home-manager.useGlobalPkgs = true;
