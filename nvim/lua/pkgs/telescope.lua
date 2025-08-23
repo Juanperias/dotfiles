@@ -1,3 +1,3 @@
 return {
-	src = "https://github.com/nvim-telescope/telescope.nvim"
+     "https://github.com/nvim-telescope/telescope.nvim"
 }
