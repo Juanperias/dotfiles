@@ -2,4 +2,5 @@
 
 no image
 
-gnome + nix
+dwm + nix
+ 
